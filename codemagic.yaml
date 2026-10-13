@@ -1,0 +1,20 @@
+workflows:
+  yasmine-android:
+    name: Yasmine Android
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: فك المشروع
+        script: |
+          unzip -o yasmine_project*.zip
+          cp -r yasmine_flutter/. .
+          rm -rf yasmine_flutter yasmine_admin
+          flutter create --org com.yasmine --project-name yasmine_app .
+          sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 23/' android/app/build.gradle.kts 2>/dev/null || sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 23/' android/app/build.gradle
+      - name: تثبيت المكتبات
+        script: flutter pub get
+      - name: بناء APK
+        script: flutter build apk --debug
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
