@@ -20,19 +20,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare ZIP
+      - name: Extract project ZIP
         run: |
-          test -f yasmin-go-app.zip
-          mkdir project
-          unzip -q yasmin-go-app.zip -d project
-          test -f project/package.json
-          cp -a project/. .
-          rm -rf project
+          unzip -q "yasmin-go-app (3).zip" -d extracted
+          test -f extracted/package.json
+          cp -a extracted/. .
+          rm -rf extracted
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -43,8 +41,11 @@ jobs:
       - name: Build website
         run: npm run build
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - name: Fix GitHub Pages path
+        run: |
+          if [ -f dist/index.html ]; then
+            sed -i 's|="/assets/|="./assets/|g; s|='\''/assets/|='\''./assets/|g' dist/index.html
+          fi
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
