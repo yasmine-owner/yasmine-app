@@ -1,0 +1,56 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Unzip project
+        run: |
+          unzip -q project.zip -d app_src
+          DIR=$(dirname "$(find app_src -name package.json -not -path '*/node_modules/*' | head -1)")
+          echo "APP_DIR=$DIR" >> $GITHUB_ENV
+          echo "Project folder: $DIR"
+
+      - name: Install dependencies
+        run: |
+          cd "$APP_DIR"
+          npm install --legacy-peer-deps
+          npm install --legacy-peer-deps @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+
+      - name: Build web app
+        run: |
+          cd "$APP_DIR"
+          npm run build
+
+      - name: Add Android platform
+        run: |
+          cd "$APP_DIR"
+          npx cap add android
+          npx cap sync android
+
+      - name: Build debug APK
+        run: |
+          cd "$APP_DIR/android"
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Factory-ERP-APK
+          path: ${{ env.APP_DIR }}/android/app/build/outputs/apk/debug/app-debug.apk
