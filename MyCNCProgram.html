@@ -1,0 +1,413 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>باصات المخرطة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0a0d11"><style>
+:root{--bg:#0a0d11;--bg2:#0d1116;--card:#11161c;--card2:#161c24;--bd:#212b36;--fg:#e9eef3;--mut:#8b98a6;--am:#fbbf24;--am2:#f59e0b;--ok:#34d399;--bad:#f87171;--blue:#7dd3fc;--teal:#2dd4bf;
+--f:Roboto,"Segoe UI",Arial,"Noto Sans Arabic",Tahoma,sans-serif;--m:"JetBrains Mono","Roboto Mono",ui-monospace,Consolas,"Courier New",monospace;box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--f);font-variant-numeric:lining-nums tabular-nums}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;background:rgba(10,13,17,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,#27303b,#151b22);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font:700 13px var(--m);color:#aab6c3}
+.hd{flex:1}.hd b{display:block;font:800 17px var(--m);letter-spacing:.5px}.hd span{font-size:12.5px;color:var(--mut)}
+.pill{font:700 14px var(--m);padding:6px 12px;border-radius:999px;border:1px solid;white-space:nowrap}
+.pill.ok{color:var(--ok);border-color:#1d5c49;background:#0f2a22}.pill.bad{color:var(--bad);border-color:#6b2b2b;background:#2c1414}.pill.am{color:var(--am);border-color:#6a5314;background:#2a2209}
+main{padding:12px 14px;max-width:760px;margin:0 auto}section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:14px;margin-bottom:14px}
+.ct{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:18px;font-weight:800}.ct i{width:9px;height:9px;border-radius:50%;background:var(--am);display:inline-block}.ct small{margin-inline-start:auto;font-size:12.5px;font-weight:400;color:var(--mut)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--card2);color:var(--fg);border:1px solid var(--bd);border-radius:14px;padding:10px 14px;font:600 15px var(--f);cursor:pointer}
+.btn.am{color:var(--am);border-color:#6a5314;background:#2a2209}.btn.rd{color:var(--bad);border-color:#6b2b2b;background:#2c1414}
+.btn.go{width:100%;justify-content:center;padding:15px;font-size:18px;font-weight:800;color:#2b1d00;border:0;background:linear-gradient(180deg,#fbbf24,#f59e0b)}
+.code{background:#07090c;border:1px solid var(--bd);border-radius:14px;max-height:330px;overflow:auto;direction:ltr}
+.ln{display:flex;align-items:center;min-height:38px;cursor:pointer;border-bottom:1px solid #0d1218}
+.ln .tx{flex:1;padding:0 12px;font:17px var(--m);white-space:pre;overflow:hidden;text-overflow:ellipsis}
+.ln .g{width:74px;flex:none;display:flex;align-items:center;justify-content:flex-end;gap:5px;padding:0 10px;font:600 15px var(--m);color:#56626f;background:#0b0f14;align-self:stretch}
+.ln.h{background:#0e1b27}.ln.h .g{color:var(--blue);background:#0f2233}.ln.a{background:#241d08}.ln.a .g{color:var(--am);background:#2f2509}
+.ln.b{background:#251a0f}.ln.b .g{color:#fb923c;background:#31200f}.ln.r{background:#0d251d}.ln.r .g{color:var(--ok);background:#0f3025}.ln.in{background:#10161d}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}.ch button{font:700 14px var(--m);padding:7px 14px;border-radius:999px;border:1px solid var(--bd);background:var(--card2);color:var(--fg);cursor:pointer}
+.ch button.on{outline:2px solid var(--am)}.ch .h{color:var(--blue)}.ch .a{color:var(--am)}.ch .b{color:#fb923c}.ch .r{color:var(--ok)}
+.hint{font-size:13px;color:var(--mut);margin:6px 0 0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fld{background:#0b0f14;border:1px solid var(--bd);border-radius:16px;padding:10px 12px}
+.fld label{display:block;font-size:13px;color:var(--mut);margin-bottom:2px}
+.fld input,.fld select{width:100%;background:none;border:0;color:var(--fg);font:600 22px var(--m);padding:2px 0;outline:none;direction:ltr;text-align:left}
+.fld .pv{font:12.5px var(--m);color:var(--ok);direction:ltr;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;min-height:18px}
+.seg{display:flex;background:#07090c;border:1px solid var(--bd);border-radius:14px;padding:4px;gap:4px;margin:6px 0 12px}
+.seg button{flex:1;border:0;border-radius:11px;padding:11px 6px;font:700 15px var(--f);background:none;color:var(--mut);cursor:pointer}.seg button.on{background:var(--am);color:#2b1d00}
+.lbl{font-size:14px;font-weight:700;margin:8px 0 0}
+.sw{display:flex;align-items:center;gap:12px;background:#221b08;border:1px solid #6a5314;border-radius:16px;padding:12px;margin:10px 0}
+.sw b{display:block;font-size:15px}.sw span{font-size:12.5px;color:var(--mut)}.sw .t{flex:1}
+.tg{width:54px;height:30px;border-radius:999px;background:#3a3f46;position:relative;cursor:pointer;flex:none}.tg::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.15s}.tg.on{background:var(--am)}.tg.on::after{left:27px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.stat .fld b{display:block;font:700 26px var(--m);margin-top:2px}.stat small{font:13px var(--f);color:var(--mut)}
+#out .code{max-height:300px}.warn{font-size:13.5px;color:var(--am);border:1px solid #6a5314;background:#221b08;border-radius:14px;padding:10px 12px;margin-top:10px}
+.sim{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--bd);background:var(--bg2)}
+#cv{display:block;width:100%;height:min(66vh,560px);touch-action:none}
+.tools{position:absolute;left:10px;top:10px;display:flex;flex-direction:column;gap:8px}
+.tools button{width:46px;height:46px;border-radius:14px;border:1px solid var(--bd);background:rgba(17,22,28,.92);color:var(--fg);font:700 20px var(--m);cursor:pointer}.tools button.on{color:var(--am);border-color:#6a5314}
+#hud{position:absolute;right:10px;bottom:10px;background:rgba(17,22,28,.92);border:1px solid var(--bd);border-radius:12px;padding:6px 12px;font:600 14px var(--m);direction:ltr}
+#hud.bad{border-color:#6b2b2b;color:var(--bad)}
+.ctl{display:flex;align-items:center;gap:10px;margin-top:12px}.spd{display:flex;background:#07090c;border:1px solid var(--bd);border-radius:12px;padding:3px}
+.spd button{border:0;background:none;color:var(--mut);font:700 14px var(--m);padding:8px 9px;border-radius:9px;cursor:pointer}.spd button.on{background:var(--am);color:#2b1d00}
+input[type=range]{flex:1;accent-color:var(--am);min-width:40px}
+.nb{width:46px;height:50px;border-radius:14px;border:1px solid var(--bd);background:var(--card2);color:var(--fg);font:700 20px var(--m);cursor:pointer}
+.pb{width:62px;height:62px;border-radius:50%;border:0;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#2b1d00;font-size:24px;cursor:pointer}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 2px 2px;direction:ltr}.chips button{flex:none;font:700 14px var(--m);padding:8px 13px;border-radius:12px;border:1px solid var(--bd);background:var(--card2);color:var(--mut);cursor:pointer}
+.chips button.on{color:var(--am);border-color:#6a5314;background:#2a2209}.chips button.bad{color:var(--bad);border-color:#6b2b2b}
+.leg{font-size:12.5px;color:var(--mut);margin-top:10px}.leg i{display:inline-block;width:16px;height:4px;border-radius:2px;vertical-align:middle;margin:0 5px}
+.sim.fs{position:fixed;inset:0;z-index:60;border-radius:0;background:var(--bg2);display:flex;flex-direction:column}.sim.fs #cv{height:100%;flex:1}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd);font-size:15px}.chk:last-child{border:0}.chk b{font:800 18px var(--m);width:22px;flex:none}.chk.ok b{color:var(--ok)}.chk.w b{color:var(--am)}.chk.e b{color:var(--bad)}
+table{width:100%;border-collapse:collapse;font:14px var(--m);direction:ltr}th,td{padding:7px 6px;text-align:right;border-bottom:1px solid var(--bd)}th{color:var(--mut);font:600 12.5px var(--f)}td.ok{color:var(--ok)}td.e{color:var(--bad)}
+.big{font:800 40px var(--m);text-align:center;margin:6px 0}.big.ok{color:var(--ok)}.big.e{color:var(--bad)}
+#msg{position:fixed;left:14px;right:14px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:30;background:#1d2630;border:1px solid var(--bd);border-radius:14px;padding:10px 14px;font-size:14px;display:none}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;background:rgba(13,17,22,.96);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;background:none;border:0;color:var(--mut);padding:10px 4px 12px;font:700 13.5px var(--f);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}nav button.on{color:var(--am)}nav svg{width:26px;height:26px}
+h3{font-size:16px;margin:16px 0 6px;color:var(--am)}.gd p,.gd li{font-size:15px;line-height:1.75}.gd ol,.gd ul{padding-inline-start:22px;margin:6px 0}.gd table{direction:rtl}.gd td,.gd th{text-align:right;vertical-align:top;font:14px var(--f)}
+textarea#src{width:100%;height:260px;background:#07090c;color:var(--fg);border:1px solid var(--bd);border-radius:14px;padding:12px;font:16px var(--m);direction:ltr}
+</style></head><body>
+<header><div class="logo">CNC</div><div class="hd"><b>LATHE PASSES</b><span>مولّد باصات المخرطة ومحاكي التشكيل</span></div><span class="pill am" id="pPass">0 pass</span><span class="pill ok" id="pSt">OK</span></header>
+<main>
+<section id="s1" class="on">
+<div class="card"><div class="ct"><i></i>برنامج التشكيل<small id="lc">0 سطر</small></div>
+<div class="row"><button class="btn" id="bUp">رفع</button><button class="btn" id="bPs">لصق</button><button class="btn" id="bSm">نموذج</button><button class="btn rd" id="bCl">مسح</button><button class="btn" id="bEd">تعديل</button><button class="btn am" id="bAuto">كشف تلقائي</button></div>
+<input type="file" id="fi" style="display:none"><div id="vw"><div class="code" id="lv"></div>
+<div class="ch" id="chs"><button class="h" data-r="h"></button><button class="a" data-r="a"></button><button class="b" data-r="b"></button><button class="r" data-r="r"></button></div>
+<p class="hint" id="hintR">اضغط على أي سطر لتعيينه للدور المختار.</p></div>
+<div id="tw" style="display:none"><textarea id="src" spellcheck="false"></textarea><div class="row" style="margin-top:10px"><button class="btn am" id="ok">تم، اعرض الأسطر</button></div></div></div>
+<div class="card"><div class="ct"><i></i>أرقام السطور</div><div class="g2">
+<div class="fld"><label>h — نهاية الهيدر</label><input id="h" type="number" inputmode="numeric" value="8"><div class="pv" id="pvh"></div></div>
+<div class="fld"><label>a — بداية الباص</label><input id="a" type="number" inputmode="numeric" value="20"><div class="pv" id="pva"></div></div>
+<div class="fld"><label>b — نهاية الباص</label><input id="b" type="number" inputmode="numeric" value="31"><div class="pv" id="pvb"></div></div>
+<div class="fld"><label>r — سطر المرجع</label><input id="r" type="number" inputmode="numeric" value="26"><div class="pv" id="pvr"></div></div></div></div>
+<div class="card"><div class="ct"><i></i>معاملات التوليد</div>
+<div class="lbl">الترحيل في</div><div class="seg" id="sgA"><button data-v="X" class="on">X فقط</button><button data-v="Z">Z فقط</button><button data-v="XZ">X و Z</button></div><input type="hidden" id="ax" value="X">
+<div class="lbl">نظام الباصات</div><div class="seg" id="sgM"><button data-v="go" class="on">ذهاب فقط</button><button data-v="rt">ذهاب وعودة</button></div><input type="hidden" id="md" value="go">
+<div class="g2">
+<div class="fld"><label>X المرجع في أول باص</label><input id="sx" type="number" step="any" inputmode="decimal" value="85"></div>
+<div class="fld"><label>خطوة X (مم)</label><input id="tx" type="number" step="any" inputmode="decimal" value="0.2"></div>
+<div class="fld"><label>Z المرجع في أول باص</label><input id="sz" type="number" step="any" inputmode="decimal" value="-30.294"></div>
+<div class="fld"><label>خطوة Z (مم)</label><input id="tz" type="number" step="any" inputmode="decimal" value="0.2"></div>
+<div class="fld"><label>قطر القلم (مم)</label><input id="td" type="number" step="any" inputmode="decimal" value="8"></div>
+<div class="fld"><label>طول الخامة Z (مم)</label><input id="sL" type="number" step="any" inputmode="decimal" value="80"></div>
+<div class="fld"><label>نهاية الخامة Z (مم)</label><input id="ze" type="number" step="any" inputmode="decimal" value="0"></div>
+<div class="fld"><label>قطر الخام (مم)</label><input id="st" type="number" step="any" inputmode="decimal" value="100"></div>
+<div class="fld"><label>تغذية F (لو الباص مفيهوش F)</label><input id="f" value="F1000."></div></div>
+<div class="sw"><div class="t"><b>بداية تلقائية من قطر الخام</b><span>الأداة تحسب أول إزاحة وعدد الباصات من قطر الخام والخطوة، وتتجاهل X المرجع</span></div><div class="tg on" id="tgA"></div><input type="checkbox" id="au" checked style="display:none"></div>
+<div class="sw"><div class="t"><b>Z تلقائي من نهاية الخامة</b><span>الأداة تحسب أول إزاحة Z وعدد الباصات من نهاية الخامة والخطوة، وتتجاهل Z المرجع (يشتغل مع Z فقط أو X و Z)</span></div><div class="tg on" id="tgZ"></div><input type="checkbox" id="auz" checked style="display:none"></div>
+<div class="sw"><div class="t"><b>تثبيت سطر الخروج</b><span>عدم إزاحة آخر حركة لحماية الأداة</span></div><div class="tg on" id="tgK"></div><input type="checkbox" id="k" checked style="display:none"></div>
+<p class="hint">اتجاه الترحيل بيتحدد من الفرق بين القيمة اللي تكتبها وقيمة سطر المرجع: أكبر منها ينزل ناحية الباص النهائي، وأصغر يطلع ناحيته.</p>
+<button class="btn go" id="go">توليد الباصات</button></div>
+<div class="card" id="out"><div class="ct"><i></i>البرنامج المولّد<small id="oc"></small></div>
+<div class="stat"><div class="fld"><small>إجمالي الباصات</small><b id="stN">-</b></div><div class="fld"><small>أول إزاحة X</small><b id="stO">-</b></div><div class="fld"><small>الوقت التقديري (دقيقة)</small><b id="stT">-</b></div><div class="fld"><small>طول القطع (متر)</small><b id="stL">-</b></div></div>
+<div class="row"><button class="btn am" id="bSim">المحاكي</button><button class="btn" id="bDl">تحميل nc.</button><button class="btn" id="bCp">نسخ</button></div>
+<div class="code" id="ov"></div><textarea id="outT" style="display:none"></textarea><div class="warn" id="wn" style="display:none"></div></div>
+</section>
+<section id="s2"><div class="card"><div class="ct"><i></i>المحاكي 2D<small id="sInfo"></small></div>
+<div class="sim" id="simbox"><canvas id="cv"></canvas>
+<div class="tools"><button id="zi">+</button><button id="zo">−</button><button id="zf">⤢</button><button id="fl">◎</button><button id="ov2">⇅</button><button id="mr">◫</button><button id="fsb">⛶</button></div><div id="hud">-</div></div>
+<div class="ctl"><div class="spd" id="spd"><button data-s="0.5">0.5x</button><button data-s="1" class="on">1x</button><button data-s="2">2x</button><button data-s="4">4x</button><button data-s="10">10x</button></div><input type="range" id="sl" min="0" max="0" value="0" style="direction:ltr"></div>
+<div class="ctl" style="justify-content:center"><button class="nb" id="nx">‹</button><button class="pb" id="pl">▶</button><button class="nb" id="pv">›</button></div>
+<div class="chips" id="pch"></div>
+<div class="row" style="margin-top:12px"><button class="btn am" id="bFin">عرض المجسم النهائي</button><button class="btn" id="bRst">من الأول</button></div>
+<div class="leg"><i style="background:var(--am)"></i>الباص الحالي<i style="background:var(--teal)"></i>باصات سابقة<i style="background:#6b7a8a"></i>حركة سريعة<i style="background:var(--ok)"></i>الشكل النهائي<i style="background:var(--bad)"></i>تلامس · اسحب للتحريك وبإصبعين للتكبير</div></div></section>
+<section id="s3"><div class="card"><div class="ct"><i></i>التصحيح</div><div class="big ok" id="bgS">OK</div><div id="cks"></div></div>
+<div class="card"><div class="ct"><i></i>الباصات<small>الإزاحة والمسافة عن الشكل النهائي</small></div><div style="overflow:auto"><table id="tb"></table></div></div></section>
+<section id="s4"><div class="card gd"><div class="ct"><i></i>دليل التشغيل الكامل</div>
+<h3>ما هذه الأداة؟</h3><p>الأداة بتاخد برنامج الباص النهائي من الـ CAM (باص أو باصين)، وتكرره بإزاحة تدريجية من الخامة لحد الشكل النهائي، وتطلع لك برنامج G-code جاهز. وفيها محاكاة 2D بتوريك الخامة والقلم وهو بيشيل المعدن، وبتنبهك لو القلم هيخبط.</p>
+<h3>خطوات التشغيل (بالترتيب)</h3><ol>
+<li><b>الصق البرنامج:</b> من تبويب "المحرر والتوليد" دوس "لصق" أو "رفع" أو "تعديل". الأداة بتعرض السطور بأرقامها.</li>
+<li><b>كشف تلقائي:</b> بيحدد لوحده الهيدر والباص النهائي وسطر المرجع. راجع الأرقام الأربعة قبل ما تكمل.</li>
+<li><b>اضبط الخامة:</b> اكتب قطر الخام وطوله ونهايته في Z.</li>
+<li><b>اختار الترحيل:</b> X فقط أو Z فقط أو X و Z، ونظام الباصات: ذهاب فقط أو ذهاب وعودة.</li>
+<li><b>اكتب الخطوة وقطر القلم وF.</b></li>
+<li><b>دوس "توليد الباصات"</b> وانتظر علامة OK فوق.</li>
+<li><b>شغّل المحاكي</b> وشوف الخامة والقلم والمجسم النهائي.</li>
+<li><b>راجع شاشة التصحيح</b> واتأكد إن مفيش ✕.</li>
+<li><b>نسخ أو تحميل</b> البرنامج، وشغّله على الماكينة بدون قطعة أول مرة.</li></ol>
+<h3>أرقام السطور (h وa وb وr)</h3><ul>
+<li><b>h:</b> آخر سطر في الهيدر (تشغيل السبندل والتبريد والوصول). كل السطور اللي قبله بتتنسخ زي ما هي.</li>
+<li><b>a:</b> أول سطر في الباص اللي هيتكرر (يشمل حركات الاقتراب السريعة).</li>
+<li><b>b:</b> آخر سطر في الباص (سطر الخروج).</li>
+<li><b>r:</b> سطر المرجع: سطر فيه X وZ، والأفضل أقل قطر. منه بتتحسب الإزاحة.</li>
+<li>السطور اللي بين h وa (الباصات القديمة) بتتشال، والسطور بعد b بتتحط في آخر البرنامج.</li></ul>
+<h3>معاملات التوليد</h3>
+<table><tr><th>الخانة</th><th>معناها</th></tr>
+<tr><td>الترحيل في</td><td>المحور اللي بيتزاح: X فقط (القطر)، Z فقط (الطول)، أو الاتنين.</td></tr>
+<tr><td>نظام الباصات</td><td>ذهاب فقط: كل باص بنفس الاتجاه. ذهاب وعودة: الباص التاني بيمشي المسار بالعكس (G02 وG03 بيتبدلوا).</td></tr>
+<tr><td>X المرجع / خطوة X</td><td>مكان سطر المرجع في أول باص، والنقصان في كل باص (على القطر).</td></tr>
+<tr><td>Z المرجع / خطوة Z</td><td>نفس الفكرة لمحور Z.</td></tr>
+<tr><td>قطر القلم</td><td>للمحاكاة وكشف الخبط فقط (مش بيدخل في G-code).</td></tr>
+<tr><td>قطر الخام</td><td>قطر الخامة الأسطوانية.</td></tr>
+<tr><td>طول الخامة Z ونهايتها</td><td>الخامة بتمتد من (النهاية − الطول) لحد النهاية في Z.</td></tr>
+<tr><td>F</td><td>تغذية بتتحط في أول باص لو الباص مفيهوش F، وبتتحسب بها الوقت التقديري.</td></tr></table>
+<h3>الزراير التلقائية</h3><ul>
+<li><b>بداية تلقائية من قطر الخام:</b> أول إزاحة X = قطر الخام − أصغر X في الباص النهائي. عدد الباصات = الإزاحة ÷ الخطوة. وبتتجاهل "X المرجع" وتكتبه لوحدها.</li>
+<li><b>Z تلقائي من نهاية الخامة:</b> أول إزاحة Z = نهاية الخامة − أبعد Z في الباص النهائي. وبتتجاهل "Z المرجع".</li>
+<li><b>تثبيت سطر الخروج:</b> سطر الخروج ما بيتزاحش، لحماية القلم.</li></ul>
+<h3>إزاي الإزاحة بتتحسب</h3><p>كل X (وZ لو مفعّل) في الباص بيتزاح بنفس المقدار، وR وF بيفضلوا ثابتين. الإزاحة بتبدأ من القيمة الأولى وتنقص بمقدار الخطوة في كل باص لحد ما توصل <b>صفر</b>، وآخر باص (FIN) هو باصك النهائي بالظبط.</p>
+<p><b>مهم عن Z:</b> إزاحة Z بتحرك الشكل كله بالطول. لو شكلك له وادي (بيقل ثم بيزيد)، جانب منه بيدخل الشغلة، والمحاكي هيطلع تنبيهات خبط. إزاحة X مفيهاش المشكلة دي.</p>
+<h3>المحاكي</h3><ul>
+<li>الخامة بتظهر بالقطر والطول اللي كتبتهم، والقلم دايرة بقطره الحقيقي، وهو بيشيل المعدن في الأماكن اللي بيعدي عليها بس.</li>
+<li>في الآخر بتشوف المجسم النهائي (زرار "عرض المجسم النهائي").</li>
+<li>+ و− و⤢ للتكبير والتصغير. بإصبعين تكبر، وبإصبع تحرك. ◎ تتبع القلم. ⇅ أفقي أو رأسي. ◫ قطاع كامل أو نصف. ⛶ ملء الشاشة.</li>
+<li>أزرار P1 وP2 وFIN بتنقلك لأي باص، والأحمر منها فيه مشكلة.</li>
+<li>الأصفر الباص الحالي، والفاتح الباصات السابقة، والبرتقالي حركة سريعة، والأخضر الشكل النهائي، والأحمر تلامس.</li></ul>
+<h3>معنى التنبيهات</h3><table><tr><th>التنبيه</th><th>معناه وإزاي تتصرف</th></tr>
+<tr><td>✕ القلم بيخبط في الشكل النهائي</td><td>باص داخل في الشغلة. راجع الاتجاه والإزاحة (خصوصًا Z).</td></tr>
+<tr><td>✕ القلم بيخبط في الخامة بحركة سريعة G00</td><td>حركة سريعة عدّت على خامة لسه متشالتش، في X أو Z. ابعد نقطة الدخول أو زوّد الإزاحة.</td></tr>
+<tr><td>✕ الخامة أصغر من الشكل النهائي</td><td>قطر الخام أقل من أكبر قطر في الشكل. كبّر القطر.</td></tr>
+<tr><td>✕ الشكل خارج طول الخامة في Z</td><td>الشكل بيخرج عن طول الخامة. عدّل الطول أو النهاية.</td></tr>
+<tr><td>! القطع في الهوا</td><td>جزء من الباصات بره الخامة. مفيش خطر، لكن وقت ضايع.</td></tr>
+<tr><td>! ذهاب وعودة وتغيّر في اتجاه Z</td><td>العكس ممكن يغرز في المعدن. الأحسن "ذهاب فقط".</td></tr></table>
+<h3>حدود الأداة (لازم تعرفها)</h3><ul>
+<li>الخامة أسطوانة مصمتة بالطول المكتوب. لو شغلتك مشكّلة قبل كده، الحسابات بتقرب فقط.</li>
+<li>الإزالة بتتحسب بدايرة القلم، وده تقريب لعملية التشكيل الفعلية.</li>
+<li>تعويض الأداة (G41/G42) بيتحط زي ما هو في البرنامج الأصلي. في "ذهاب وعودة" التعويض بيتحط في أول باص، وجهته بتتعكس في العودة، فراجعه بنفسك.</li>
+<li>الأداة ما بتعرفش حدود الماكينة ولا قوة القلم ولا الشد.</li></ul>
+<h3>قايمة الأمان قبل التشغيل على الماكينة</h3><ol>
+<li>العلامة فوق <b>OK</b> بدون ✕.</li>
+<li>أرقام h وa وb وr صح، والباص النهائي هو الباص اللي في الرسمة.</li>
+<li>قطر وطول ونهاية الخامة مطابقين للقطعة الفعلية.</li>
+<li>قطر القلم الحقيقي مكتوب صح.</li>
+<li>شفت المحاكاة كلها، والمجسم النهائي هو المطلوب.</li>
+<li>الأصفار (Z0 وX) في الماكينة نفس اللي في الـ CAM.</li>
+<li>أول تشغيل بدون قطعة، ثم Single Block، وإيدك على Feed Hold.</li></ol></div></section>
+</main><div id="msg"></div>
+<nav><button data-t="1" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M10 13l-2 2 2 2M14 13l2 2-2 2"/></svg>المحرر والتوليد</button><button data-t="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 18h16M12 3v18"/><circle cx="12" cy="12" r="3"/></svg>المحاكي</button><button data-t="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>التصحيح</button><button data-t="4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M8 7h7M8 11h7"/></svg>الدليل</button></nav>
+<script>
+const SAMPLE=`O0001
+
+( Turn Finish4 )
+(mohamed salah)
+T0000
+S2500 M03
+G98
+G00 X100. Z20. M08
+X110.107
+Z-70.354
+G41 G01 X90.107 Z-80.354 F1000.
+X89.4 Z-80.
+Z-69.5
+G02 X88.532 Z-61.764 R69.2
+G01 X81.447 Z-30.271
+G03 X81.248 Z-28.505 R15.8
+X83.14 Z-23.12 R15.8
+G01 X93.897 Z-8.283
+G40 X94.803 Z-8.071
+G00 X114.803
+Z-80.354
+X89.707
+G41 G01 X89. Z-80.
+Z-69.5
+G02 X88.135 Z-61.786 R69.
+G01 X81.049 Z-30.294
+G03 X80.848 Z-28.505 R16.
+X82.764 Z-23.052 R16.
+G01 X93.521 Z-8.215
+G40 X94.427 Z-8.003
+G00 X100.
+Z20. M09
+M05
+M30`;
+const $=id=>document.getElementById(id),fmt=v=>{let s=(Math.round(v*1000)/1000).toString();return s.includes('.')?s:s+'.'},f3=v=>(Math.round(v*1000)/1000).toString();
+const NUM=/(-?\d*\.?\d+)/;
+function parse(text){const L=text.replace(/\r/g,'').split('\n'),M=[];let g=0,x=null,z=null;
+ L.forEach((raw,i)=>{const l=raw.replace(/\([^)]*\)/g,'');
+  const gs=[...l.matchAll(/G0*(\d+)/g)].map(m=>+m[1]);if(gs.includes(4))return;
+  gs.forEach(n=>{if(n<=3)g=n});
+  const mx=l.match(new RegExp('X'+NUM.source)),mz=l.match(new RegExp('Z'+NUM.source)),mr=l.match(new RegExp('R'+NUM.source));
+  if(!mx&&!mz)return;const x0=x,z0=z;if(mx)x=+mx[1];if(mz)z=+mz[1];
+  const cm=l.match(/G4[012]/),fm=l.match(new RegExp('F'+NUM.source));M.push({i:i+1,g,x0:x0===null?x:x0,z0:z0===null?z:z0,x1:x,z1:z,hx:!!mx,hz:!!mz,r:mr?+mr[1]:null,cmp:cm?cm[0]:'',f:fm?fm[0]:''})});
+ return{L,M}}
+function arc(p0,p1,R,cw,n){const dz=p1[0]-p0[0],dr=p1[1]-p0[1],c=Math.hypot(dz,dr);if(c<1e-9||!R)return[p1];
+ R=Math.max(R,c/2);const h=Math.sqrt(R*R-c*c/4),ux=dz/c,uy=dr/c,rx=uy,ry=-ux,s=cw?1:-1,
+ cx=(p0[0]+p1[0])/2+s*rx*h,cy=(p0[1]+p1[1])/2+s*ry*h;let a0=Math.atan2(p0[1]-cy,p0[0]-cx),a1=Math.atan2(p1[1]-cy,p1[0]-cx),d=a1-a0;
+ while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;const o=[];for(let i=1;i<=n;i++){const a=a0+d*i/n;o.push([cx+R*Math.cos(a),cy+R*Math.sin(a)])}return o}
+
+let AUTOSZ=0,AUTOSX=0,OFFS=[],TR=[],PASSES=0,idx=0,AN=null,role='h',playing=false,SP=1,PS=[];
+const ORDER=['h','a','b','r'],NAMES={h:'نهاية الهيدر',a:'بداية الباص',b:'نهاية الباص',r:'المرجع'};
+function toast(t){const m=$('msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',3500)}
+function offs(d0,s,n){const sg=d0>0?1:-1,o=[];for(let k=0;k<=n;k++){let d=d0-sg*s*k;if(d*sg<0||k==n)d=0;o.push(Math.abs(d)<1e-9?0:d)}return o}
+function build(){const v=i=>$(i).value,P=parse(v('src')),h=+v('h'),a=+v('a'),b=+v('b'),rl=+v('r'),ax=v('ax'),md=v('md'),msg=$('msg');
+ const blk=P.M.filter(m=>m.i>=a&&m.i<=b),ref=P.M.find(m=>m.i==rl);
+ if(!(h<a&&a<=b&&blk.length)||!ref){toast('راجع أرقام السطور (سطر المرجع لازم يكون فيه X أو Z)');return}
+ const ci=blk.map((m,j)=>m.g>0?j:-1).filter(j=>j>=0);if(!ci.length){toast('مفيش سطور قطع G01/G02/G03 في الباص');return}
+ const pre=blk.slice(0,ci[0]),cuts=blk.slice(ci[0],ci[ci.length-1]+1),exs=blk.slice(ci[ci.length-1]+1),st=cuts[0],
+ ex=exs.length?exs[exs.length-1].x1:cuts[cuts.length-1].x1+10,hasF=cuts.some(m=>m.f),F=v('f').trim(),
+ tx=Math.abs(+v('tx'))||.2,tz=Math.abs(+v('tz'))||.2,dx0=ax!='Z'?($('au').checked?(+v('st')-Math.min(...cuts.map(m=>Math.min(m.x0,m.x1)))):+v('sx')-ref.x1):0,AX=(AUTOSX=ref.x1+dx0),dz0=ax!='X'?($('auz').checked?(+v('ze')-Math.max(...cuts.map(m=>Math.max(m.z0,m.z1)))):+v('sz')-ref.z1):0,AZ=(AUTOSZ=ref.z1+dz0),
+ n=Math.max(Math.ceil(Math.abs(dx0)/tx-1e-9),Math.ceil(Math.abs(dz0)/tz-1e-9),0);
+ if(n>600){toast('عدد الباصات كبير ('+n+')، كبّر الخطوة أو صغّر قطر الخام');return}
+ const DX=dx0?offs(dx0,tx,n):Array(n+1).fill(0),DZ=dz0?offs(dz0,tz,n):Array(n+1).fill(0),keep=$('k').checked,OF=(OFFS=DX.map((d,i)=>[d,DZ[i],md=='rt'&&i%2==1])),
+ hm=P.M.filter(m=>m.i<=h),cur=hm.length?[hm[hm.length-1].x1,hm[hm.length-1].z1]:[st.x0,st.z0],
+ O=P.L.slice(0,h),T=[{x:cur[0],z:cur[1],p:0,c:false}],hasG40=cuts.some(m=>m.cmp=='G40');let first=true;
+ const mv=(g,x,z,r,pass,pre_,post)=>{let t=(pre_?pre_+' ':'')+'G0'+g+(x!=null?' X'+fmt(x):'')+(z!=null?' Z'+fmt(z):'')+(r?' R'+fmt(r):'')+(post?' '+post:'');O.push(t);
+  const nx_=x!=null?x:cur[0],nz_=z!=null?z:cur[1];
+  if(g==0){const ds=Math.hypot(nz_-cur[1],(nx_-cur[0])/2),st=Math.max(1,Math.ceil(ds/3));for(let q=1;q<=st;q++)T.push({x:cur[0]+(nx_-cur[0])*q/st,z:cur[1]+(nz_-cur[1])*q/st,p:pass,c:false})}else if(g==1)T.push({x:nx_,z:nz_,p:pass,c:true});else arc([cur[1],cur[0]/2],[nz_,nx_/2],r,g==2,20).forEach(q=>T.push({x:q[1]*2,z:q[0],p:pass,c:true}));
+  cur[0]=nx_;cur[1]=nz_};
+ for(let k=0;k<=n;k++){const dx=DX[k],dz=DZ[k],rev=md=='rt'&&k%2==1,last=k==n;
+  O.push('(PASS '+(k+1)+' OFFSET X'+Math.round(dx*1000)/1000+' Z'+Math.round(dz*1000)/1000+(rev?' REVERSE':'')+')');
+  if(!rev&&(md=='go'||k==0))pre.forEach(m=>{mv(0,m.hx?(m.x1==st.x0?m.x1+dx:m.x1):null,m.hz?(m.z1==st.z0?m.z1+dz:m.z1):null,null,k)});
+  const segs=rev?cuts.slice().reverse():cuts;
+  segs.forEach((m,j)=>{let g=m.g,x=m.x1,z=m.z1;if(rev){x=m.x0;z=m.z0;if(g>1)g=g==2?3:2}
+   const fj=!rev&&j==0,lj=j==segs.length-1;let cmp='',post=m.f||'';
+   if(md=='go'&&!rev)cmp=m.cmp;else if(!rev&&k==0&&j==0)cmp=m.cmp;
+   if(md=='rt'&&last&&lj&&hasG40)cmp='G40';
+   if(first&&j==0&&!hasF&&F)post=F;
+   mv(g,x+dx,z+dz,m.r,k,cmp,rev?'':post);});
+  first=false;if(md=='go'||last)mv(0,keep?ex:ex+dx,null,null,k)}
+ P.L.slice(b).forEach(l=>O.push(l));
+ $('outT').value=O.join('\n');TR=T;PASSES=n+1;idx=0;
+ toast('تم: '+PASSES+' باص — '+(ax=='XZ'?'X و Z':ax)+' — '+(md=='rt'?'ذهاب وعودة (تعويض الأداة بيتحط في أول باص بس، راجعه)':'ذهاب فقط'));afterBuild()}
+
+function other(P,i){const l=(P.L[i-1]||'').replace(/\([^)]*\)/g,'');return /[MST]\d/.test(l)||/G9\d/.test(l)}
+function detect(){const P=parse($('src').value),M=P.M;if(!M.length){toast('مفيش حركات في البرنامج');return}
+ let gs=[],s=-1;M.forEach((m,j)=>{if(m.cmp=='G41'||m.cmp=='G42')s=j;if(m.cmp=='G40'&&s>=0){gs.push([s,j]);s=-1}});
+ if(!gs.length){let st=-1;M.forEach((m,j)=>{if(m.g>0&&st<0)st=j;if((m.g==0||j==M.length-1)&&st>=0){gs.push([st,m.g>0?j:j-1]);st=-1}})}
+ if(!gs.length){toast('مقدرتش أحدد الباصات تلقائي، اختار السطور بإيدك');return}
+ const back=sj=>{let j=sj-1;while(j>=0&&M[j].g==0&&!other(P,M[j].i))j--;return j+1};
+ const fb=back(gs[0][0]),H=fb<gs[0][0]?M[fb].i-1:M[gs[0][0]].i-1,[ls,le]=gs[gs.length-1],bs=back(ls);
+ let k=le+1;while(k<M.length&&M[k].g==0&&!other(P,M[k].i))k++;
+ const A=M[bs].i,B=M[k-1>le?k-1:le].i,cs=M.slice(ls,le+1),st=cs.filter(m=>m.g==1),pool=st.length?st:cs.filter(m=>m.g>0),ref=pool.reduce((p,m)=>m.x1<p.x1?m:p,pool[0]);
+ $('h').value=H;$('a').value=A;$('b').value=B;$('r').value=ref.i;$('sx').value=Math.round(ref.x1+4);$('sz').value=ref.z1;setRole('h');renderCode();
+ toast('تم التحديد التلقائي: '+gs.length+' باص في البرنامج الأصلي، والمكرر هو آخر باص (سطور '+A+' إلى '+B+')');}
+
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')||' ';
+function setRole(x){role=x;document.querySelectorAll('#chs button').forEach(b=>b.classList.toggle('on',b.dataset.r==x));$('hintR').textContent='الدور المختار: '+NAMES[x]+' — اضغط على السطر لتعيينه.'}
+const lines=()=>$('src').value.replace(/\r/g,'').split('\n');
+function renderCode(){const L=lines(),h=+$('h').value,a=+$('a').value,b=+$('b').value,r=+$('r').value,lv=$('lv'),sc=lv.scrollTop;$('lc').textContent=L.length+' سطر';
+ lv.innerHTML=L.map((t,i)=>{const n=i+1;const c=n==r?'r':n==a?'a':n==b?'b':n==h?'h':(n>a&&n<b?'in':'');const tag=(n==h?'h':'')+(n==a?'a':'')+(n==b?'b':'')+(n==r?'r':'');
+  return '<div class="ln '+c+'" data-n="'+n+'"><span class="tx">'+esc(t)+'</span><span class="g">'+(tag?'<span>'+tag+'</span>':'')+n+'</span></div>'}).join('');lv.scrollTop=sc;
+ ORDER.forEach(k=>{document.querySelector('#chs .'+k).textContent=k+' '+$(k).value;const n=+$(k).value;$('pv'+k).textContent=n?(n+': '+(L[n-1]||'').trim()):''})}
+let HM=new Float32Array(2),HZ0=0,HDZ=0.25,hmI=-1;
+function hmInit(){const L=Math.max(5,+$('sL').value||80),ze=+$('ze').value||0,stR=(+$('st').value||100)/2;HZ0=ze-L;HM=new Float32Array(Math.ceil(L/HDZ)+1).fill(stR);hmI=-1}
+function hmApply(Rt,cz,cr){let rem=false;const j0=Math.max(0,Math.floor((cz-Rt-HZ0)/HDZ)),j1=Math.min(HM.length-1,Math.ceil((cz+Rt-HZ0)/HDZ));for(let j=j0;j<=j1;j++){const dz=HZ0+j*HDZ-cz;if(Math.abs(dz)>=Rt)continue;const b=cr-Math.sqrt(Rt*Rt-dz*dz);if(b<HM[j]-1e-4){HM[j]=Math.max(0,b);rem=true}}return rem}
+function hmHit(Rt,cz,cr){const j0=Math.max(0,Math.floor((cz-Rt-HZ0)/HDZ)),j1=Math.min(HM.length-1,Math.ceil((cz+Rt-HZ0)/HDZ));for(let j=j0;j<=j1;j++){const dz=HZ0+j*HDZ-cz;if(Math.abs(dz)>=Rt)continue;if(HM[j]-(cr-Math.sqrt(Rt*Rt-dz*dz))>0.05)return true}return false}
+function cutStep(a,p){const R=AN.R;if(!a)return hmApply(R,p.cz,p.cr);const dz=p.z-a.z,dr=(p.x-a.x)/2,L=Math.hypot(dz,dr);if(L<1e-9)return hmApply(R,p.cz,p.cr);
+ const radial=Math.abs(dr)/L>=0.85;let nz=0,nr=1;if(!radial){nz=-dr/L;nr=dz/L;if(nr<0){nz=-nz;nr=-nr}}
+ const n=Math.max(1,Math.ceil(L/0.3));let rm=false;for(let q=1;q<=n;q++){const t=q/n;rm=hmApply(R,radial?a.cz+(p.cz-a.cz)*t:a.z+dz*t+nz*R,radial?a.cr+(p.cr-a.cr)*t:a.x/2+dr*t+nr*R)||rm}return rm}
+function hmStepK(k){const p=TR[k];if(!p.c)return;cutStep(k&&TR[k-1].p==p.p?TR[k-1]:null,p)}
+function hmTo(i){if(i<hmI)hmInit();for(let k=hmI+1;k<=i;k++)hmStepK(k);if(i>hmI)hmI=i}
+// ---- analysis: gouge / tool interference vs final contour ----
+function analyze(){const R=(+$('td').value||8)/2,last=PASSES-1,fin=TR.filter(p=>p.p==last&&p.c).map(p=>[p.z,p.x/2]);
+ AN={R,fin,bad:0,st:[],rev:0,badPass:{}};if(fin.length<2){TR.forEach(p=>{p.cz=p.z;p.cr=p.x/2;p.bad=false});return}
+ const rs=[fin[0]];for(let i=1;i<fin.length;i++){const a=fin[i-1],b=fin[i],L=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(L/0.5));for(let k=1;k<=n;k++)rs.push([a[0]+(b[0]-a[0])*k/n,a[1]+(b[1]-a[1])*k/n])}
+ const S=[0];for(let i=1;i<rs.length;i++)S.push(S[i-1]+Math.hypot(rs[i][0]-rs[i-1][0],rs[i][1]-rs[i-1][1]));
+ const poly=rs.concat([[rs[rs.length-1][0],0],[rs[0][0],0]]);
+ const near=(z,r,skipS,skipD)=>{let best=1e9,q=null,s=0,sq=0;for(let i=0;i<rs.length-1;i++){if(skipD&&Math.abs((S[i]+S[i+1])/2-skipS)<skipD)continue;const a0=rs[i][0],b0=rs[i][1],dz=rs[i+1][0]-a0,dr=rs[i+1][1]-b0,L2=dz*dz+dr*dr;let t=L2?((z-a0)*dz+(r-b0)*dr)/L2:0;t=Math.max(0,Math.min(1,t));const qz=a0+t*dz,qr=b0+t*dr,d=Math.hypot(z-qz,r-qr);if(d<best){best=d;q=[qz,qr];s=i;sq=S[i]+t*(S[i+1]-S[i])}}return{d:best,q,s,sq}};
+ const inside=(z,r)=>{let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const zi=poly[i][0],ri=poly[i][1],zj=poly[j][0],rj=poly[j][1];if((ri>r)!=(rj>r)&&z<(zj-zi)*(r-ri)/(rj-ri)+zi)c=!c}return c};
+ for(let k=0;k<PASSES;k++)AN.st[k]={min:1e9,bad:0};
+ TR.forEach(p=>{const z=p.z,r=p.x/2,n=near(z,r),ins=inside(z,r);let bad=false,cz=z,cr=r+R;
+  if(ins&&n.d>0.05){bad=true;cz=z;cr=r}
+  else{let nz=0,nr=1;if(n.d>1e-6){nz=(z-n.q[0])/n.d;nr=(r-n.q[1])/n.d}else{const a=rs[n.s],b=rs[n.s+1],dz=b[0]-a[0],dr=b[1]-a[1],L=Math.hypot(dz,dr)||1;nz=-dr/L;nr=dz/L;if(nr<0){nz=-nz;nr=-nr}}
+   cz=z+nz*R;cr=r+nr*R;if(near(cz,cr,n.sq,2.5*R).d<R-0.1)bad=true;if(!ins&&p.c)AN.st[p.p].min=Math.min(AN.st[p.p].min,n.d)}
+  p.cz=cz;p.cr=cr;p.bad=bad;if(bad){AN.bad++;AN.st[p.p].bad++;AN.badPass[p.p]=1}});
+ const stD=(+$('st').value||100),stR=stD/2,ze=+$('ze').value||0;hmInit();
+ AN.stk=0;AN.stkPass={};AN.air=0;AN.cl=0;AN.small=fin.filter(p=>p[1]*2>stD+0.01).length;AN.outZ=fin.filter(p=>p[0]<HZ0-0.01||p[0]>ze+0.01).length;
+ TR.forEach((p,i)=>{if(!p.c){p.cz=p.z;p.cr=p.x/2+R;p.sbad=hmHit(R,p.cz,p.cr);if(p.sbad){AN.stk++;AN.stkPass[p.p]=1}}
+  else{p.sbad=false;const a=i&&TR[i-1].p==p.p?TR[i-1]:null,L=a?Math.hypot(p.z-a.z,(p.x-a.x)/2):0,rm=cutStep(a,p);if(a){AN.cl+=L;if(!rm)AN.air+=L}}});
+ AN.airPct=AN.cl?AN.air/AN.cl*100:0;let v1=0;for(let j=0;j<HM.length;j++)v1+=HM[j]*HM[j];AN.vol=Math.PI*(stR*stR*HM.length-v1)*HDZ/1000;hmInit();
+ let sg=0;for(let i=0;i<fin.length-1;i++){const d=fin[i+1][0]-fin[i][0];if(Math.abs(d)<0.01)continue;const s=d>0?1:-1;if(sg&&s!=sg)AN.rev++;sg=s}}
+function afterBuild(){analyze();const O=$('outT').value.split('\n');$('oc').textContent=O.length+' سطر';
+ $('ov').innerHTML=O.map((t,i)=>'<div class="ln'+(t.startsWith('(PASS')?' a':'')+'"><span class="tx">'+esc(t)+'</span><span class="g">'+(i+1)+'</span></div>').join('');
+ $('stN').textContent=PASSES;const o=OFFS[0];$('stO').textContent=f3(o[0])+(o[1]?' / Z'+f3(o[1]):'');
+ let cl=0;for(let i=1;i<TR.length;i++)if(TR[i].c&&TR[i-1].p==TR[i].p)cl+=Math.hypot(TR[i].z-TR[i-1].z,(TR[i].x-TR[i-1].x)/2);const Fv=parseFloat(($('f').value.match(/[\d.]+/)||[0])[0]);$('stL').textContent=(cl/1000).toFixed(1);$('stT').textContent=Fv?(cl/Fv).toFixed(1):'-';if($('au').checked&&$('ax').value!='Z')$('sx').value=f3(AUTOSX);if($('auz').checked&&$('ax').value!='X')$('sz').value=f3(AUTOSZ);
+ $('pPass').textContent=PASSES+' pass';const errs=AN.bad+AN.stk+(AN.small?1:0)+(AN.outZ?1:0),wr=AN.airPct>5;$('pSt').textContent=errs?'ERR '+errs:(wr?'WARN':'OK');$('pSt').className='pill '+(errs?'bad':(wr?'am':'ok'));
+ const w=[];if(AN.bad)w.push('✕ فيه '+AN.bad+' نقطة القلم بيخبط فيها في الشكل النهائي.'+($('ax').value!='X'?' إزاحة Z بتحرك الشكل كله بالطول، فعلى جانب منحدر الشكل بتدخل في الشغلة. جرّب اتجاه Z التاني أو X فقط.':''));
+ if(AN.stk)w.push('✕ القلم بيخبط في الخامة بحركة سريعة G00 في '+Object.keys(AN.stkPass).length+' باص: خطر خبط. ابعد نقطة الدخول في X أو Z عن الخامة المتبقية.');
+ if(AN.outZ)w.push('✕ الشكل النهائي خارج طول الخامة في Z ('+AN.outZ+' نقطة): غيّر طول الخامة أو نهايتها.');
+ if(AN.small)w.push('✕ الخامة أصغر من الشكل النهائي في '+AN.small+' نقطة: محتاج قطر خام أكبر.');
+ if(wr)w.push('! حوالي '+Math.round(AN.airPct)+'% من القطع في الهوا (برّه الخامة)، ده بيزوّد الوقت.');
+ if($('md').value=='rt'&&AN.rev)w.push('! الباص ذهاب وعودة: المسار فيه '+AN.rev+' تغيّر في اتجاه Z، والعكس ممكن يعمل غرز في المعدن.');
+ const wn=$('wn');wn.style.display=w.length?'block':'none';wn.innerHTML=w.join('<br>');
+ PS=[];TR.forEach((p,i)=>{if(PS[p.p]===undefined)PS[p.p]=i});
+ $('pch').innerHTML=Array.from({length:PASSES},(_,k)=>'<button data-k="'+k+'" class="'+(AN.badPass[k]||AN.stkPass[k]?'bad':'')+'">'+(k==PASSES-1?'FIN':'P'+(k+1))+'</button>').join('');
+ $('sl').max=TR.length-1;$('sl').value=0;idx=0;stopP();renderDebug();draw();$('sInfo').textContent=PASSES+' باص';toast('تم توليد '+PASSES+' باص')}
+function renderDebug(){if(!AN)return;const bd=AN.bad+AN.stk+(AN.small?1:0)+(AN.outZ?1:0);$('bgS').textContent=bd?'ERR '+bd:(AN.airPct>5?'WARN':'OK');$('bgS').className='big '+(bd?'e':'ok');
+ const ck=[],mins=AN.st.slice(0,-1).map(s=>s.min).filter(v=>v<1e8),mn=mins.length?Math.min(...mins):0;
+ ck.push([bd?'e':'ok',bd?'تلامس/دخول في الشكل النهائي: '+bd+' نقطة':'مفيش تلامس: القلم بعيد عن الشكل النهائي في كل الباصات']);
+ ck.push([AN.stk?'e':'ok',AN.stk?'القلم بيخبط في الخامة بحركة سريعة G00 في '+Object.keys(AN.stkPass).length+' باص':'مفيش حركة سريعة داخل الخامة']);
+ ck.push([AN.outZ?'e':'ok',AN.outZ?'الشكل النهائي خارج طول الخامة في Z في '+AN.outZ+' نقطة':'الشكل النهائي جوه طول الخامة في Z']);
+ ck.push(['ok','حجم المعدن المُزال تقريبًا '+AN.vol.toFixed(1)+' سم³']);
+ ck.push([AN.small?'e':'ok',AN.small?'الخامة أصغر من الشكل النهائي في '+AN.small+' نقطة':'قطر الخام يكفي الشكل النهائي']);
+ ck.push([AN.airPct>5?'w':'ok','القطع في الهوا: '+Math.round(AN.airPct)+'% من طول القطع']);
+ ck.push(['ok','الباص الأخير = الشكل النهائي بإزاحة صفر']);
+ ck.push(['ok','أقل مسافة بين باص سابق والشكل النهائي: '+f3(mn)+' مم']);
+ ck.push([AN.rev?'w':'ok',AN.rev?'المسار فيه '+AN.rev+' تغيّر في اتجاه Z: ذهاب وعودة ممكن يبوظ الشغل':'اتجاه Z في المسار ثابت: ذهاب وعودة ممكن']);
+ ck.push(['ok','قطر القلم '+f3(AN.R*2)+' مم، وعدد الباصات '+PASSES]);
+ $('cks').innerHTML=ck.map(c=>'<div class="chk '+c[0]+'"><b>'+(c[0]=='ok'?'✓':c[0]=='w'?'!':'✕')+'</b><span>'+c[1]+'</span></div>').join('');
+ $('tb').innerHTML='<tr><th>الحالة</th><th>أقل مسافة</th><th>Z</th><th>X</th><th>باص</th></tr>'+AN.st.map((s,k)=>{const o=OFFS[k];return '<tr><td class="'+(s.bad||AN.stkPass[k]?'e':'ok')+'">'+(s.bad||AN.stkPass[k]?'ERR':'OK')+'</td><td>'+(s.min<1e8?f3(s.min):'-')+'</td><td>'+f3(o[1])+'</td><td>'+f3(o[0])+'</td><td>'+(k==PASSES-1?'FIN':'P'+(k+1))+(o[2]?' ↩':'')+'</td></tr>'}).join('')}
+// ---- simulation drawing ----
+const V={z:1,px:0,py:0,follow:false,vert:false,mirror:true},cv=$('cv');
+const zoomAt=(k,cx,cy)=>{const nz=Math.max(.3,Math.min(80,V.z*k));k=nz/V.z;V.px=cx-(cx-V.px)*k;V.py=cy-(cy-V.py)*k;V.z=nz};
+function draw(){const dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;if(!W||!H)return;
+ if(cv.width!=Math.round(W*dpr)||cv.height!=Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+ const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,W,H);
+ if(!TR.length||!AN||AN.fin.length<2){c.fillStyle='#8b98a6';c.font='15px sans-serif';c.textAlign='center';c.fillText('ولّد الباصات الأول',W/2,H/2);return}
+ const R=AN.R,fin=AN.fin,stR=(+$('st').value||100)/2;let z0=1e9,z1=-1e9,rm=stR;TR.forEach(p=>{z0=Math.min(z0,p.z);z1=Math.max(z1,p.z);rm=Math.max(rm,p.x/2+R)});
+ const zs=HZ0,ze2=HZ0+(HM.length-1)*HDZ;z0=Math.min(z0,zs-30);z1=Math.max(z1,ze2);
+ const pad=22,ext=V.mirror?2*rm:rm;let s,base;
+ if(!V.vert){s=Math.min((W-2*pad)/(z1-z0),(H-2*pad)/ext);const ox=(W-(z1-z0)*s)/2,oy=V.mirror?H/2:(H+ext*s)/2;base=(z,r)=>[ox+(z-z0)*s,oy-r*s]}
+ else{s=Math.min((W-2*pad)/ext,(H-2*pad)/(z1-z0));const oy=(H+(z1-z0)*s)/2,ox=V.mirror?W/2:(W-ext*s)/2;base=(z,r)=>[ox+r*s,oy-(z-z0)*s]}
+ const i0=Math.min(idx,TR.length-1),t=TR[i0],cp=t.p;
+ if(V.follow){const tb=base(t.cz,t.cr);V.px=W/2-tb[0]*V.z;V.py=H/2-tb[1]*V.z}
+ const P=(z,r)=>{const b=base(z,r);return[b[0]*V.z+V.px,b[1]*V.z+V.py]},sc=s*V.z,lo=V.mirror?-1:0;
+ const poly=(pts,fill,stroke,lw,dash)=>{c.beginPath();pts.forEach((p,i)=>{const q=P(p[0],p[1]);i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1])});if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.setLineDash(dash||[]);c.lineWidth=lw||1;c.strokeStyle=stroke;c.stroke();c.setLineDash([])}};
+ poly([[z0,0],[z1,0]],null,'#3a4552',1,[8,5]);
+ poly([[zs,stR],[ze2,stR],[ze2,stR*lo],[zs,stR*lo]],'rgba(120,140,160,.05)','#4a5766',1,[6,5]);
+ poly([[zs-28,stR*1.12],[zs,stR*1.12],[zs,-stR*1.12*(V.mirror?1:0)],[zs-28,-stR*1.12*(V.mirror?1:0)]],'#2a323b','#3d4854',1);
+ hmTo(i0);const top=[];for(let j=0;j<HM.length;j++)top.push([HZ0+j*HDZ,HM[j]]);
+ const sh=top.concat(top.slice().reverse().map(q=>[q[0],V.mirror?-q[1]:0])),lowEnd=V.mirror?-stR:0,
+ gg=V.vert?c.createLinearGradient(P(zs,lowEnd)[0],0,P(zs,stR)[0],0):c.createLinearGradient(0,P(zs,stR)[1],0,P(zs,lowEnd)[1]);
+ [[0,'#8795a3'],[.22,'#d6dee6'],[.5,'#9aa8b5'],[.78,'#55616d'],[1,'#2b333b']].forEach(q=>gg.addColorStop(q[0],q[1]));poly(sh,gg,'#b5c0cb',1);
+ poly(fin,null,'#34d399',2.2);
+ for(let i=1;i<=i0&&i<TR.length;i++){const a=TR[i-1],b=TR[i];if(!b.c&&b.p!=cp)continue;const A=P(a.z,a.x/2),B=P(b.z,b.x/2);c.beginPath();c.moveTo(A[0],A[1]);c.lineTo(B[0],B[1]);
+  if(!b.c){c.strokeStyle='#6b7a8a';c.lineWidth=1;c.setLineDash([4,4])}else if(b.p==cp){c.strokeStyle='#fbbf24';c.lineWidth=2.4;c.setLineDash([])}else{c.strokeStyle='rgba(45,212,191,.4)';c.lineWidth=1;c.setLineDash([])}c.stroke()}
+ c.setLineDash([]);c.strokeStyle='#f87171';c.lineWidth=2;for(let i=0;i<=i0;i++){const p=TR[i];if(!(p.bad||p.sbad))continue;const q=P(p.z,p.x/2);c.beginPath();c.moveTo(q[0]-5,q[1]-5);c.lineTo(q[0]+5,q[1]+5);c.moveTo(q[0]+5,q[1]-5);c.lineTo(q[0]-5,q[1]+5);c.stroke()}
+ const cc=P(t.cz,t.cr),rp=R*sc;c.beginPath();c.arc(cc[0],cc[1],rp,0,2*Math.PI);c.fillStyle=(t.bad||t.sbad)?'rgba(248,113,113,.35)':'rgba(251,191,36,.22)';c.fill();c.lineWidth=2;c.strokeStyle=(t.bad||t.sbad)?'#f87171':'#e9eef3';c.stroke();
+ c.beginPath();c.moveTo(cc[0]-rp*.45,cc[1]);c.lineTo(cc[0]+rp*.45,cc[1]);c.moveTo(cc[0],cc[1]-rp*.45);c.lineTo(cc[0],cc[1]+rp*.45);c.lineWidth=1;c.stroke();
+ const tp=P(t.z,t.x/2);c.beginPath();c.arc(tp[0],tp[1],3.5,0,2*Math.PI);c.fillStyle='#34d399';c.fill();
+ const h=$('hud');h.textContent='PASS '+(cp+1)+'/'+PASSES+' · X'+f3(t.x)+' Z'+f3(t.z)+(t.sbad?' · STOCK HIT':t.bad?' · HIT':'');h.className=(t.bad||t.sbad)?'bad':'';
+ document.querySelectorAll('#pch button').forEach(b=>b.classList.toggle('on',+b.dataset.k==cp));}
+// ---- animation ----
+let lastT=0,acc=0;function loop(ts){if(!playing)return;const dt=Math.min(.05,(ts-lastT)/1000||0);lastT=ts;acc+=dt*60*SP;const n=Math.floor(acc);if(n){acc-=n;idx=Math.min(TR.length-1,idx+n)}$('sl').value=idx;draw();if(idx>=TR.length-1)stopP();else requestAnimationFrame(loop)}
+function startP(){if(!TR.length)return;if(idx>=TR.length-1)idx=0;playing=true;$('pl').textContent='❚❚';lastT=performance.now();requestAnimationFrame(loop)}
+function stopP(){playing=false;$('pl').textContent='▶'}
+// ---- events ----
+const PT=new Map();let lastD=0;
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);PT.set(e.pointerId,[e.clientX,e.clientY]);lastD=0});
+cv.addEventListener('pointermove',e=>{if(!PT.has(e.pointerId))return;const pv=PT.get(e.pointerId);PT.set(e.pointerId,[e.clientX,e.clientY]);
+ if(PT.size==1){if(!V.follow){V.px+=e.clientX-pv[0];V.py+=e.clientY-pv[1]}}
+ else if(PT.size==2){const q=[...PT.values()],d=Math.hypot(q[0][0]-q[1][0],q[0][1]-q[1][1]),r=cv.getBoundingClientRect();if(lastD)zoomAt(d/lastD,(q[0][0]+q[1][0])/2-r.left,(q[0][1]+q[1][1])/2-r.top);lastD=d}draw()});
+['pointerup','pointercancel'].forEach(n=>cv.addEventListener(n,e=>{PT.delete(e.pointerId);lastD=0}));
+cv.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.deltaY<0?1.15:1/1.15,e.offsetX,e.offsetY);draw()},{passive:false});
+const tg=(id,fn)=>$(id).onclick=fn,mid=()=>[cv.clientWidth/2,cv.clientHeight/2];
+tg('zi',()=>{zoomAt(1.4,...mid());draw()});tg('zo',()=>{zoomAt(1/1.4,...mid());draw()});tg('zf',()=>{V.z=1;V.px=V.py=0;V.follow=false;$('fl').classList.remove('on');draw()});
+tg('fl',()=>{V.follow=!V.follow;$('fl').classList.toggle('on',V.follow);if(V.follow&&V.z<3)V.z=4;draw()});
+tg('ov2',()=>{V.vert=!V.vert;V.z=1;V.px=V.py=0;$('ov2').classList.toggle('on',V.vert);draw()});tg('mr',()=>{V.mirror=!V.mirror;$('mr').classList.toggle('on',V.mirror);draw()});$('mr').classList.add('on');
+tg('fsb',()=>{$('simbox').classList.toggle('fs');$('fsb').classList.toggle('on');setTimeout(()=>{V.z=1;V.px=V.py=0;draw()},60)});
+tg('pl',()=>playing?stopP():startP());
+tg('bFin',()=>{if(!TR.length)return;stopP();idx=TR.length-1;$('sl').value=idx;draw()});tg('bRst',()=>{stopP();idx=0;$('sl').value=0;draw()});
+$('sl').oninput=e=>{stopP();idx=+e.target.value;draw()};
+$('spd').onclick=e=>{const b=e.target.closest('button');if(!b)return;SP=+b.dataset.s;document.querySelectorAll('#spd button').forEach(x=>x.classList.toggle('on',x==b))};
+$('pch').onclick=e=>{const b=e.target.closest('button');if(!b)return;stopP();idx=PS[+b.dataset.k]||0;$('sl').value=idx;draw()};
+const stepP=d=>{if(!TR.length)return;stopP();const k=Math.max(0,Math.min(PASSES-1,TR[Math.min(idx,TR.length-1)].p+d));idx=PS[k];$('sl').value=idx;draw()};
+tg('nx',()=>stepP(-1));tg('pv',()=>stepP(1));
+window.addEventListener('resize',draw);
+function showTab(n){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id=='s'+n));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==n));window.scrollTo(0,0);if(n==2)setTimeout(draw,30);if(n==3)renderDebug()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+$('lv').onclick=e=>{const d=e.target.closest('.ln');if(!d)return;$(role).value=d.dataset.n;setRole(ORDER[(ORDER.indexOf(role)+1)%4]);renderCode()};
+document.querySelectorAll('#chs button').forEach(b=>b.onclick=()=>setRole(b.dataset.r));
+ORDER.forEach(i=>$(i).addEventListener('input',renderCode));
+const seg=(id,inp)=>$(id).onclick=e=>{const b=e.target.closest('button');if(!b)return;$(inp).value=b.dataset.v;document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('on',x==b))};seg('sgA','ax');seg('sgM','md');
+$('tgA').onclick=()=>{const k=$('au');k.checked=!k.checked;$('tgA').classList.toggle('on',k.checked)};
+$('tgZ').onclick=()=>{const k=$('auz');k.checked=!k.checked;$('tgZ').classList.toggle('on',k.checked)};
+$('tgK').onclick=()=>{const k=$('k');k.checked=!k.checked;$('tgK').classList.toggle('on',k.checked)};
+const load=t=>{$('src').value=t;detect();renderCode()};
+$('bUp').onclick=()=>$('fi').click();$('fi').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>load(r.result);r.readAsText(f);e.target.value=''};
+$('bPs').onclick=()=>{if(navigator.clipboard&&navigator.clipboard.readText)navigator.clipboard.readText().then(t=>t?load(t):openEd()).catch(openEd);else openEd()};
+const openEd=()=>{$('vw').style.display='none';$('tw').style.display='block';$('src').focus()};
+$('bEd').onclick=openEd;$('ok').onclick=()=>{$('tw').style.display='none';$('vw').style.display='block';detect();renderCode()};
+$('bSm').onclick=()=>load(SAMPLE);$('bCl').onclick=()=>{$('src').value='';renderCode()};$('bAuto').onclick=detect;
+$('go').onclick=()=>{build();document.getElementById('out').scrollIntoView({behavior:'smooth'})};
+$('bSim').onclick=()=>showTab(2);
+$('bCp').onclick=()=>{const t=$('outT');t.style.display='block';t.select();try{document.execCommand('copy');toast('تم النسخ')}catch(e){}t.style.display='none'};
+$('bDl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('outT').value],{type:'text/plain'}));a.download='O0001_multipass.nc';document.body.appendChild(a);a.click();a.remove()};
+setRole('h');load(SAMPLE);build();
+</script></body></html>
