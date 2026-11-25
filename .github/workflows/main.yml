@@ -1,0 +1,54 @@
+name: Build Yasmine Studio APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: سحب الملف المضغوط
+        uses: actions/checkout@v4
+
+      - name: فك الضغط وتجهيز الملفات تلقائيا
+        run: |
+          mkdir -p www
+          unzip -o "yasmine_smart_design_backup_1795627596661(1).zip" -d temp_extract
+          find temp_extract -type f \( -name "*.html" -o -name "*.json" \) -exec cp {} www/ \;
+          if [ -f "www/yasmine_studio_full.html" ]; then
+            mv "www/yasmine_studio_full.html" "www/index.html"
+          fi
+
+      - name: إعداد بيئة Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: إعداد بيئة Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: تحويل المشروع إلى تطبيق أندرويد
+        run: |
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "Yasmine Studio" "com.yasminestudio.app" --web-dir www
+          npx cap add android
+          npx cap sync android
+
+      - name: بناء ملف APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: رفع ملف APK للتحميل
+        uses: actions/upload-artifact@v4
+        with:
+          name: Yasmine-Studio-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
